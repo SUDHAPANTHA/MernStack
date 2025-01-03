@@ -10,10 +10,9 @@ const AboutPage = () => {
           <h3 className="text-3xl text-center font-bold text-gray-900 mb-4">
             The Redex Library
           </h3>
-          <p className="text-gray-600 text-xl text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non lacinia
-            fusce eu id. Fringilla sit sociis in suspendisse. Ultrices enim odio
-            amet odio in duis fames.
+          <p className="text-gray-600 text-xl text-centerjustify-content">
+            Reading books is a wonderful way to spend your time. Here at we
+            believe reading will help you make connections with others.
           </p>
         </div>
 
