@@ -5,7 +5,6 @@ const AboutPage = () => {
   return (
     <section className="bg-gradient-to-b from-white to-pink-300 py-16 px-8 rounded-b-3xl rounded-t-3xl">
       <div className="max-w-7xl mx-auto">
-        {/* Heading and Description */}
         <div className="mb-12">
           <h2 className="text-5xl font-bold text-gray-800 mb-4">About</h2>
           <h3 className="text-3xl text-center font-bold text-gray-900 mb-4">
