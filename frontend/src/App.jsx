@@ -10,6 +10,7 @@ import AdminLogin from "./AdminPages/AdminLogin";
 import DisplayUser from "./AdminPages/DisplayUser";
 import AdminNavBar from "./AdminPages/AdminNavBar";
 import DisplayAllBook from "./AdminPages/DisplayAllBook";
+import AboutPage from "./pages/AboutPage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/display-user" element={<DisplayUser />} />
         <Route path="/admin-navbar" element={<AdminNavBar />} />
         <Route path="/displayallbooks" element={<DisplayAllBook />} />
+        <Route path="/about-page" element={<AboutPage />} />
       </Routes>
     </div>
   );

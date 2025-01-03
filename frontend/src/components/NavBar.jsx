@@ -13,7 +13,7 @@ function NavBar() {
         <a href="/" className="text-white font-medium my-3 text-xl">
           Home
         </a>
-        <a href="/" className="text-white font-medium my-3 text-xl">
+        <a href="/about-page" className="text-white font-medium my-3 text-xl">
           About
         </a>
         <a href="/" className="text-white font-medium my-3 text-xl">
