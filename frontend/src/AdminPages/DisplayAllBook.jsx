@@ -46,6 +46,28 @@ function DisplayAllBook() {
     }
   }
 
+  // Function to delete a book
+  async function deleteBook(id) {
+    try {
+      const result = await fetch(`/proxy/delete-book/${id}`, {
+        headers: { "content-type": "application/json" },
+        method: "DELETE",
+      });
+
+      const re = await result.json();
+
+      if (re) {
+        toast.success(re.msg);
+        setBookData((prevBookData) =>
+          prevBookData.filter((book) => book._id !== id)
+        );
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message || "Something went wrong");
+    }
+  }
+
   useEffect(() => {
     getBookData();
   }, []);
@@ -92,7 +114,10 @@ function DisplayAllBook() {
                   {new Date(items.publishdate).toLocaleDateString()}
                 </td>
                 <td className="flex justify-center items-center gap-4 p-9">
-                  <button className="bg-red-500 text-white py-2 px-4 rounded-lg">
+                  <button
+                    onClick={() => deleteBook(items._id)}
+                    className="bg-red-500 text-white py-2 px-4 rounded-lg"
+                  >
                     Delete
                   </button>
                   <button

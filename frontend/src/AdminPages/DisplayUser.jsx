@@ -1,101 +1,107 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import AdminNavBar from "./AdminNavBar";
 
-function DisplayAllBook() {
-  const [books, setBooks] = useState([]);
-  const [totalBooks, setTotalBooks] = useState(0);
+function DisplayUser() {
+  const [data, setData] = useState([]);
+  const [totalStudent, setTotalStudent] = useState(0);
 
-  async function getBookData() {
+  // Function to get student data
+  async function getStudentData() {
     try {
-      const response = await fetch("/proxy/admin-get-books", {
+      const result = await fetch("/proxy/admin-get-student", {
+        headers: { "content-type": "application/json" },
         method: "GET",
-        headers: { "Content-Type": "application/json" },
       });
-      const responseData = await response.json();
-      console.log(responseData);
 
-      if (responseData.allbooksdata) {
-        setBooks(responseData.allbooksdata);
-        setTotalBooks(responseData.allbooksdata.length);
-      } else {
-        throw new Error("Invalid data format");
-      }
+      const recivedData = await result.json();
+      console.log(recivedData);
+      setData(recivedData.studentdata);
+      setTotalStudent(recivedData.totalStudent);
     } catch (error) {
-      console.error(error);
-      toast.error(error.message || "Something went wrong while fetching books");
+      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   }
 
-  async function deleteBook(id) {
+  // Function to delete user
+  async function deleteUser(id) {
     try {
-      const result = await fetch(`/proxy/delete-book/${id}`, {
-        headers: { "Content-Type": "application/json" },
+      const result = await fetch(`/proxy/delete-user/${id}`, {
+        headers: { "content-type": "application/json" },
         method: "DELETE",
       });
-      const response = await result.json();
-      if (response) {
-        toast.success(response.msg);
-        setBooks((prevBooks) => prevBooks.filter((book) => book._id !== id));
-        setTotalBooks((prevTotal) => prevTotal - 1);
+
+      const re = await result.json();
+
+      if (re) {
+        toast.success(re.msg);
+        setData(data.filter((items) => items.id !== id));
+        setTotalStudent(totalStudent - 1);
       }
     } catch (error) {
-      console.error(error);
-      toast.error(error.message || "Something went wrong while deleting book");
+      console.log(error);
+      toast.error(error.message || "Something went wrong");
     }
   }
 
+  // UseEffect hook to call the function on page render
   useEffect(() => {
-    getBookData();
+    getStudentData();
   }, []);
 
   return (
-    <div className="h-screen p-4 w-full">
-      <p className="font-bold text-4xl pb-2">Display All Books</p>
-      <p className="text-lg mb-4">Total Books: {totalBooks}</p>
+    <div className="bg-gray-100 min-h-screen p-6">
+      <div className="flex items-center justify-between mb-6">
+        <p className="font-bold text-4xl bg-gradient-to-r from-blue-500 to-green-500 pb-2 w-fit text-transparent bg-clip-text">
+          Display All Users
+        </p>
+        <span className="text-xl font-semibold">
+          Total Students:{" "}
+          <span className="font-bold text-2xl text-blue-600">
+            {totalStudent}
+          </span>
+        </span>
+      </div>
 
-      <table className="table-auto bg-blue-600 w-full border-collapse">
+      <table className="w-full table-auto border-collapse shadow-md rounded-lg overflow-hidden">
         <thead>
-          <tr className="text-white">
-            <th className="p-2 border">ID</th>
-            <th className="p-2 border">Name</th>
-            <th className="p-2 border">Author</th>
-            <th className="p-2 border">Genre</th>
-            <th className="p-2 border">Action</th>
+          <tr className="bg-blue-600 text-white text-left">
+            <th className="p-4 border border-blue-700">Id</th>
+            <th className="p-4 border border-blue-700">Name</th>
+            <th className="p-4 border border-blue-700">Email</th>
+            <th className="p-4 border border-blue-700">Action</th>
           </tr>
         </thead>
         <tbody>
-          {books.length > 0 ? (
-            books.map((book) => (
-              <tr key={book._id} className="bg-white even:bg-gray-200">
-                <td className="p-2 border">{book._id}</td>
-                <td className="p-2 border">{book.bookname}</td>
-                <td className="p-2 border">{book.author}</td>
-                <td className="p-2 border">{book.genre.join(", ")}</td>
-                <td className="flex justify-center items-center gap-2 p-4">
-                  <button className="bg-lime-600 text-white py-2 px-4 rounded-lg">
+          {data.map((items, index) => (
+            <tr
+              key={items.id}
+              className={`${
+                index % 2 === 0 ? "bg-gray-100" : "bg-white"
+              } hover:bg-blue-100`}
+            >
+              <td className="p-4 border border-gray-300">{items.id}</td>
+              <td className="p-4 border border-gray-300">{items.name}</td>
+              <td className="p-4 border border-gray-300">{items.email}</td>
+              <td className="p-4 border border-gray-300">
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => deleteUser(items.id)}
+                    className="bg-lime-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+                  >
                     Update
                   </button>
-                  <button
-                    onClick={() => deleteBook(book._id)}
-                    className="bg-red-600 text-white py-2 px-4 rounded-lg"
-                  >
+                  <button className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">
                     Delete
                   </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="p-2 text-center">
-                No books available
+                </div>
               </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-export default DisplayAllBook;
+export default DisplayUser;
