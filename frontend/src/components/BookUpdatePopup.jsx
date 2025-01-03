@@ -40,7 +40,7 @@ function BookUpdatePopup({ close, updateUserData, setUpdateUserData }) {
 
             <input
               type="text"
-              className="p-2 rounded-md border w-full mt-2 outline-none focus:border-lime-500"
+              className="p-2 rounded-md border w-full mt-2 outline-none focus:border-blue-500"
               placeholder="enter book name"
               id="bookname"
               autoFocus
@@ -74,7 +74,7 @@ function BookUpdatePopup({ close, updateUserData, setUpdateUserData }) {
 
             <input
               type="date"
-              className="p-2 rounded-md border w-full mt-2 outline-none focus:border-lime-500"
+              className="p-2 rounded-md border w-full mt-2 outline-none focus:border-blue-500"
               placeholder="enter book date"
               id="date"
               value={
@@ -96,7 +96,7 @@ function BookUpdatePopup({ close, updateUserData, setUpdateUserData }) {
             <RxCross1 size={28} />
           </div>
 
-          <button className="w-full px-2 py-1.5 rounded-md text-white bg-lime-600 hover:bg-lime-700 mt-4">
+          <button className="w-full px-2 py-1.5 rounded-md text-white bg-blue-600 hover:bg-blue-700 mt-4">
             Update{" "}
           </button>
         </form>
