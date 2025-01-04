@@ -83,7 +83,7 @@ function Login() {
             <div>
               <a
                 href="/forgot-password"
-                className="hover:text-blue-800 text-md"
+                className="hover:text-blue-800 text-md text-blue-300 font-bold"
               >
                 Forgot Password?
               </a>
