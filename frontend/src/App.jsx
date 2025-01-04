@@ -11,6 +11,9 @@ import DisplayUser from "./AdminPages/DisplayUser";
 import AdminNavBar from "./AdminPages/AdminNavBar";
 import DisplayAllBook from "./AdminPages/DisplayAllBook";
 import AboutPage from "./pages/AboutPage";
+import UserSideBar from "./components/UserSideBar";
+import UserDashboard from "./pages/UserDashBoard";
+import UserDashBoard from "./pages/UserDashBoard";
 
 const App = () => {
   return (
@@ -27,6 +30,8 @@ const App = () => {
         <Route path="/admin-navbar" element={<AdminNavBar />} />
         <Route path="/displayallbooks" element={<DisplayAllBook />} />
         <Route path="/about-page" element={<AboutPage />} />
+        <Route path="/user-sidebar" element={<UserSideBar />} />
+        <Route path="/user-dashboard" element={<UserDashBoard />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import backgroundImage from "../assets/img/bg.png"; // Update the path to your image file
@@ -11,21 +11,27 @@ function Login() {
 
   async function loginStudent(e) {
     e.preventDefault();
+    console.log("Login form submitted");
+
     try {
       const result = await fetch("/proxy/student-login", {
         headers: { "Content-type": "application/json" },
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
+
       const data = await result.json();
+      console.log("Server response:", data);
+
       if (data.status === 200) {
         toast.success(data.msg);
-        navigate("/");
+        navigate("/user-dashboard");
       } else {
         toast.error(data.msg);
       }
     } catch (error) {
-      console.error(error.message);
+      console.error("Error during login:", error.message);
+      toast.error("Something went wrong");
     }
   }
 
@@ -40,10 +46,10 @@ function Login() {
         <NavBar />
         <form
           onSubmit={loginStudent}
-          className="bg-white p-10 max-w-md w-full mx-auto rounded-xl mt-30 shadow-lg"
+          className="bg-white p-10 max-w-md w-full mx-auto rounded-xl shadow-lg"
         >
           <p className="text-2xl mb-4 text-center">
-            <a href="/" className=" hover:text-blue-800">
+            <a href="/" className="hover:text-blue-800">
               Login Page
             </a>
           </p>
@@ -51,7 +57,7 @@ function Login() {
             <input
               className="mb-5 p-2 rounded-md w-full border border-gray-300 focus:ring-2 focus:ring-light-blue-500 focus:border-light-blue-500"
               type="email"
-              placeholder="Enter your mail here"
+              placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
@@ -60,18 +66,21 @@ function Login() {
             <input
               className="mb-5 p-2 rounded-md w-full border border-blue-300 focus:ring-2 focus:ring-light-blue-500 focus:border-light-blue-500"
               type="password"
-              placeholder="Enter Your Password here"
+              placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
           </div>
           <div>
-            <button className="bg-blue-500 mb-5 p-2 rounded-md w-full text-white text-xl hover:bg-blue-600 transition-all">
+            <button
+              type="submit"
+              className="bg-blue-500 mb-5 p-2 rounded-md w-full text-white text-xl hover:bg-blue-600 transition-all"
+            >
               Login
             </button>
           </div>
           <div className="flex text-center gap-32">
-            <div className="text-center">
+            <div>
               <a
                 href="/forgot-password"
                 className="hover:text-blue-800 text-md"
@@ -79,7 +88,7 @@ function Login() {
                 Forgot Password?
               </a>
             </div>
-            <div className="text-center">
+            <div>
               <a href="/admin-login" className="hover:text-blue-800 text-md">
                 Admin Login
               </a>

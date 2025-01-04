@@ -101,7 +101,7 @@ app.post("/student-login", async (req, res) => {
     }
 
     if (validateUser && isMatch) {
-      return res.status(200).json("Login successful");
+      return res.status(200).json({ msg: "Login successful", status: 200 });
     }
   } catch (error) {
     return res
