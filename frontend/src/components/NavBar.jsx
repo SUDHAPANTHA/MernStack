@@ -6,10 +6,10 @@ function NavBar() {
 
   return (
     <div>
-      <div className="absolute top-6 left-6">
+      <div className="absolute top-6 left-16">
         <h1 className="text-3xl font-bold text-white">Redex</h1>
       </div>
-      <div className="absolute top-6 right-6 flex space-x-6">
+      <div className="absolute top-6 right-32 flex space-x-6">
         <a href="/" className="text-white font-medium my-3 text-xl">
           Home
         </a>
