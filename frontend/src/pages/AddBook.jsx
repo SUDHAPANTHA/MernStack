@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import backgroundImage from "../assets/img/bg.png";
+import NavBar from "../components/NavBar";
 
 function AddBook() {
   const [bookData, setBookData] = useState({
     bookname: "",
     author: "",
-    genre: [], // Correct spelling of genre
+    genre: [],
     description: "",
     publishdate: "",
     image: null,
   });
 
-  // Function to handle form change
   function handleFormChange(e) {
     const { name, value, type, files, checked } = e.target;
 
@@ -24,7 +25,6 @@ function AddBook() {
           : prev.genre.filter((gen) => gen !== value);
         return { ...prev, genre: updatedGenre };
       } else if (name === "publishdate") {
-        // Ensure the date is in YYYY-MM-DD format
         const formattedDate = new Date(value).toISOString().split("T")[0];
         return { ...prev, publishdate: formattedDate };
       } else {
@@ -33,10 +33,8 @@ function AddBook() {
     });
   }
 
-  // Function to handle form submit or to add a book
   async function addBook(e) {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("image", bookData.image);
     formData.append("bookname", bookData.bookname);
@@ -44,7 +42,6 @@ function AddBook() {
     formData.append("description", bookData.description);
     formData.append("publishdate", bookData.publishdate);
 
-    // Ensure genre is appended correctly
     bookData.genre.forEach((gen) => formData.append("genre", gen));
 
     try {
@@ -67,10 +64,16 @@ function AddBook() {
 
   return (
     <>
-      <div className="min-h-screen gap-4">
+      <div
+        className="flex justify-center items-center h-screen bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+        }}
+      >
+        <NavBar />
         <form
           encType="multipart/form-data"
-          className="bg-gradient-to-t from-blue-100 to-purple-100 min-w-96 max-w-md h-full my-6 px-10 py-6 rounded-lg mx-auto"
+          className="bg-gradient-to-t from-blue-100 to-purple-100 min-w-96 max-w-md  my-6 px-10 py-6 rounded-lg mx-auto mb-32"
           style={{ boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)" }}
           onSubmit={addBook}
         >

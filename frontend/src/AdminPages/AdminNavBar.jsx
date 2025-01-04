@@ -33,6 +33,15 @@ function AdminNavBar() {
               Display All Book
             </span>
           </Link>
+          <Link
+            to="/add-book"
+            className="bg-white rounded-xl font-bold flex p-4"
+          >
+            <FaBook size={20} />{" "}
+            <span className="ml-3 font-semibold hover:underline hover:decoration-3">
+              Add Book
+            </span>
+          </Link>
         </ul>
       </nav>
     </>

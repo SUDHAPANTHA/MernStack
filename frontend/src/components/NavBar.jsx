@@ -22,12 +22,6 @@ function NavBar() {
         <a href="/" className="text-white font-medium my-3 text-xl">
           Contact Us
         </a>
-        <button
-          onClick={() => navigate("/add-book")}
-          className="bg-white text-blue-600 px-4 py-2 rounded-md font-medium hover:bg-blue-500 hover:text-white"
-        >
-          Add Book
-        </button>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import backgroundImage from "../assets/img/book-removebg-preview.png";
 
 const AboutPage = () => {
   return (
-    <section className="h-screen bg-gradient-to-b from-white to-pink-300 py-16 px-8 rounded-b-3xl rounded-t-3xl">
+    <section className="bg-gradient-to-b from-white to-pink-300 py-16 px-8 rounded-b-3xl rounded-t-3xl">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
           <h2 className="text-5xl font-bold text-gray-800 mb-4">About</h2>
